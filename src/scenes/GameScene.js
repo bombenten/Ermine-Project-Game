@@ -28,11 +28,6 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        //Show X Y
-        this.label = this.add.text(0, 0, '(x, y)', { fontFamily: '"Monospace"'})
-        .setDepth(100); 
-        this.pointer = this.input.activePointer;
-
         //Back ground
         this.load.image('frontBG', 'src/image/front ground.png');
         this.load.image('middleBG', 'src/image/middle ground.png');
@@ -46,9 +41,14 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
+        //Show X Y
+        this.label = this.add.text(0, 0, '(x, y)', { fontFamily: '"Monospace"'})
+        .setDepth(100); 
+        this.pointer = this.input.activePointer;
+
         //Create Image
         frontBG = this.add.tileSprite(0, 0, 1600, 720, 'frontBG').setOrigin(0,0);
-        middleBG = this.add.tileSprite(0, 0, 1600, 720, 'middleBG').setOrigin(0,0);
+        middleBG = this.add.tileSprite(0, 0, 1280, 720, 'middleBG').setOrigin(0,0);
         skybox = this.physics.add.image(0, 0, 'skyblock')
         .setScale(5,0.4)
         .setVisible()
@@ -57,6 +57,7 @@ class GameScene extends Phaser.Scene {
         .setScale(0.5)
         .setSize(250,100)
         .setOffset(200,125);
+        ermine.depth = ermine.y;
 
         //collider
         this.physics.add.collider(ermine, skybox);
@@ -101,6 +102,7 @@ class GameScene extends Phaser.Scene {
                 .setOffset(30,240);
                 snowball.setVelocityX(Phaser.Math.Between(-200, -500));
                 snowball.anims.play('snowballAni', true);
+                snowball.depth = snowball.y;
             },
             callbackScope: this,
             loop: true,
@@ -122,6 +124,8 @@ class GameScene extends Phaser.Scene {
     update(delta, time) {
         //Show X Y
         this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')'); 
+
+        //set Depth
 
         //BG Tile Sprite
         frontBG.tilePositionX += 3;
