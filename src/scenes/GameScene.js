@@ -57,7 +57,6 @@ class GameScene extends Phaser.Scene {
         .setScale(0.5)
         .setSize(250,100)
         .setOffset(200,125);
-        ermine.depth = ermine.y;
 
         //collider
         this.physics.add.collider(ermine, skybox);
@@ -125,7 +124,8 @@ class GameScene extends Phaser.Scene {
         //Show X Y
         this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')'); 
 
-        //set Depth
+        //set Depth ermine
+        ermine.depth = ermine.y - (ermine.height - 254 ) ;
 
         //BG Tile Sprite
         frontBG.tilePositionX += 3;
