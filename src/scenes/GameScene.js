@@ -29,7 +29,7 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        //Back ground
+        //Background
         this.load.image('frontBG', 'src/image/front ground.png');
         this.load.image('middleBG', 'src/image/middle ground.png');
         this.load.image('skyblock', 'src/image/SkyBlock.png');
@@ -62,8 +62,6 @@ class GameScene extends Phaser.Scene {
         //collider
         this.physics.add.collider(ermine, skybox);
 
-
-
         //ermine Animation
         this.anims.create({
             key: 'ermineAni',
@@ -90,6 +88,7 @@ class GameScene extends Phaser.Scene {
             repeat: -1
         })
 
+        //snowball Group
         snowGroup = this.physics.add.group();
 
         //Snow Event
@@ -152,6 +151,7 @@ class GameScene extends Phaser.Scene {
             ermine.setVelocityX(0);
         }
 
+        //Destroy when snowball x < -150
         for (let i = 0; i < snowGroup.getChildren().length; i++) {
             if (snowGroup.getChildren()[i].x < -150) {
                 snowGroup.getChildren()[i].destroy();
