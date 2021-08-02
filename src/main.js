@@ -1,6 +1,7 @@
 import 'phaser';
 import Phaser from 'phaser';
 import GameScene from './scenes/GameScene';
+import GameOver from './scenes/GameOver';
 
 
 const config = {
@@ -18,8 +19,11 @@ const config = {
             // gravity: {y:300}
         }
     },
-    scene: [
-        GameScene
+    scene: [ 
+        GameScene,
+        GameOver,
+        
+       
     ],
     
     

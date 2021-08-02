@@ -11,6 +11,7 @@ let snowball;
 
 //Event
 let snowEvent;
+let snowGroup;
 
 //Controller  
 let keyW;
@@ -60,9 +61,7 @@ class GameScene extends Phaser.Scene {
 
         //collider
         this.physics.add.collider(ermine, skybox);
-        this.physics.add.overlap(ermine, snowball, ()=>{
-            
-        });
+        
 
 
         //ermine Animation
@@ -91,6 +90,8 @@ class GameScene extends Phaser.Scene {
             repeat: -1
         })
         
+        snowGroup = this.physics.add.group();
+
         //Snow Event
         snowEvent = this.time.addEvent({
             delay: Phaser.Math.Between(1000, 3000),
@@ -98,9 +99,13 @@ class GameScene extends Phaser.Scene {
                 snowball = this.physics.add.sprite(1280, Phaser.Math.Between(150 , 550), 'snowball')
                 .setScale(0.65)
                 .setSize(230,60)
-                .setOffset(30,240);
+                .setOffset(30,220);
+                snowGroup.add(snowball);
                 snowball.setVelocityX(Phaser.Math.Between(-200, -500));
                 snowball.anims.play('snowballAni', true);
+                this.physics.add.collider(ermine, snowGroup, ()=>{
+                this.scene.start('GameOver');
+        });
                 snowball.depth = snowball.y;
             },
             callbackScope: this,
@@ -147,7 +152,11 @@ class GameScene extends Phaser.Scene {
             ermine.setVelocityX(0);
         }
 
-
+        for(let i = 0; i < snowGroup.getChildren().length; i++){
+            if(snowGroup.getChildren()[i].x < -150){
+                snowGroup.getChildren()[i].destroy();
+            }      
+        }
 
 
     }
