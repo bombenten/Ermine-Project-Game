@@ -8,6 +8,9 @@ let skybox;
 //Character
 let ermine;
 let snowball;
+let snowball1;
+let snowball2;
+let snowball3;
 
 //Event
 let snowEvent;
@@ -53,11 +56,33 @@ class GameScene extends Phaser.Scene {
         .setScale(5,0.4)
         .setVisible()
         .setImmovable();
+
+        //ermine
         ermine = this.physics.add.sprite(190, 360, 'ermine').setScale(0.5)
         .setScale(0.5)
         .setSize(250,100)
         .setOffset(200,125);
-        ermine.depth = ermine.y;
+        // ermine.depth = ermine.y;
+
+        //Snow Ball
+        snowball1 = this.physics.add.sprite(600, 100, 'snowball')
+        .setScale(0.65)
+        .setSize(230,60)
+        .setOffset(30,240);
+        snowball1.depth = snowball1.y;
+
+        snowball2 = this.physics.add.sprite(600, 300, 'snowball')
+        .setScale(0.65)
+        .setSize(230,60)
+        .setOffset(30,240);
+        snowball2.depth = snowball2.y;
+
+        snowball3 = this.physics.add.sprite(600, 500, 'snowball')
+        .setScale(0.65)
+        .setSize(230,60)
+        .setOffset(30,240);
+        snowball3.depth = snowball3.y;
+
 
         //collider
         this.physics.add.collider(ermine, skybox);
@@ -81,33 +106,33 @@ class GameScene extends Phaser.Scene {
         ermine.setCollideWorldBounds(true);
 
         //Snow Ball Animation
-        this.anims.create({
-            key: 'snowballAni',
-            frames: this.anims.generateFrameNumbers('snowball', {
-                start: 0,
-                end: 2
-            }),
-            duration: 750,
-            framerate: 1,
-            repeat: -1
-        })
-        
-        //Snow Event
-        snowEvent = this.time.addEvent({
-            delay: Phaser.Math.Between(1000, 3000),
-            callback: function () {
-                snowball = this.physics.add.sprite(1280, Phaser.Math.Between(150 , 550), 'snowball')
-                .setScale(0.65)
-                .setSize(230,60)
-                .setOffset(30,240);
-                snowball.setVelocityX(Phaser.Math.Between(-200, -500));
-                snowball.anims.play('snowballAni', true);
-                snowball.depth = snowball.y;
-            },
-            callbackScope: this,
-            loop: true,
-            paused: false
-        })
+        // this.anims.create({
+        //     key: 'snowballAni',
+        //     frames: this.anims.generateFrameNumbers('snowball', {
+        //         start: 0,
+        //         end: 2
+        //     }),
+        //     duration: 750,
+        //     framerate: 1,
+        //     repeat: -1
+        // })
+        // snowball.anims.play('snowballAni', true);
+        // //Snow Event
+        // snowEvent = this.time.addEvent({
+        //     delay: Phaser.Math.Between(1000, 3000),
+        //     callback: function () {
+        //         snowball = this.physics.add.sprite(1280, Phaser.Math.Between(150 , 550), 'snowball')
+        //         .setScale(0.65)
+        //         .setSize(230,60)
+        //         .setOffset(30,240);
+        //         snowball.setVelocityX(Phaser.Math.Between(-200, -500));
+        //         snowball.anims.play('snowballAni', true);
+        //         snowball.depth = snowball.y;
+        //     },
+        //     callbackScope: this,
+        //     loop: true,
+        //     paused: false
+        // })
 
 
         //Player Control
@@ -122,8 +147,21 @@ class GameScene extends Phaser.Scene {
     
     
     update(delta, time) {
+
+        ermine.depth = ermine.y - (ermine.height - 254 ) ;
+
+        // snowball1.depth = snowball1.y;
+        // snowball2.depth = snowball2.y;
+        // snowball3.depth = snowball3.y;
+
+
         //Show X Y
-        this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')'); 
+        this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')' 
+        + '(Ermine : ' + ermine.y + ')'
+        +'(Snowball 1 : ' + snowball1.y + ')'
+        + '(Snowball 2 : ' + snowball2.y + ')'
+        + '(Snowball 3 : ' + snowball3.y + ')'
+        + '(ErHi/2 : ' + (ermine.height - 254) + ')'); 
 
         //set Depth
 
