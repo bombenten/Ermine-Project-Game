@@ -104,6 +104,7 @@ class GameScene extends Phaser.Scene {
                 snowball.setVelocityX(Phaser.Math.Between(-200, -500));
                 snowball.anims.play('snowballAni', true);
                 this.physics.add.overlap(ermine, snowGroup, () => {
+                    
                     this.scene.start('GameOver');
                 });
                 snowball.depth = snowball.y;
