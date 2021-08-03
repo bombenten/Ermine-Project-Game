@@ -22,9 +22,9 @@ const config = {
         }
     },
     scene: [
+        LoadingBar,
         GameScene,
         GameOver,
-        LoadingBar,
         Default
     ],
 
