@@ -24,6 +24,7 @@ class GameOver extends Phaser.Scene {
         gameOver.setInteractive();
         gameOver.on('pointerdown', () => {
             this.scene.start('GameScene')
+            location.reload();
         })
 
     }

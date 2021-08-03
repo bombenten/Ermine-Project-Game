@@ -8,12 +8,10 @@ let skybox;
 //Character
 let ermine;
 let snowball;
-let ermineDead;
 
 //Event
 let snowEvent;
 let snowGroup;
-let goGameover;
 
 //Controller  
 let keyW;
@@ -108,7 +106,6 @@ class GameScene extends Phaser.Scene {
                 this.physics.add.overlap(ermine, snowGroup, () => {
                     this.scene.start('GameOver');
                 });
-                // this.physics.add.overlap(ermine, snowGroup, goGameover);
                 snowball.depth = snowball.y;
             },
             callbackScope: this,
