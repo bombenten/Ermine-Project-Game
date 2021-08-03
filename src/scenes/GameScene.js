@@ -8,10 +8,12 @@ let skybox;
 //Character
 let ermine;
 let snowball;
+let ermineDead;
 
 //Event
 let snowEvent;
 let snowGroup;
+let goGameover;
 
 //Controller  
 let keyW;
@@ -102,15 +104,17 @@ class GameScene extends Phaser.Scene {
                 snowGroup.add(snowball);
                 snowball.setVelocityX(Phaser.Math.Between(-200, -500));
                 snowball.anims.play('snowballAni', true);
-                this.physics.add.collider(ermine, snowGroup, () => {
+                this.physics.add.overlap(ermine, snowGroup, () => {
                     this.scene.start('GameOver');
                 });
+                // this.physics.add.overlap(ermine, snowGroup, goGameover);
                 snowball.depth = snowball.y;
             },
             callbackScope: this,
             loop: true,
             paused: false
         })
+
 
 
         //Player Control
