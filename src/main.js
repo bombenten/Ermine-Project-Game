@@ -2,6 +2,8 @@ import 'phaser';
 import Phaser from 'phaser';
 import GameScene from './scenes/GameScene';
 import GameOver from './scenes/GameOver';
+import LoadingBar from './scenes/LoadingBar';
+import Default from './scenes/Defualt';
 
 
 const config = {
@@ -22,10 +24,9 @@ const config = {
     scene: [
         GameScene,
         GameOver,
-
-
+        LoadingBar,
+        Default
     ],
-
 
 };
 
