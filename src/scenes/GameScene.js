@@ -63,7 +63,7 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(ermine, skybox);
 
         //ermine Animation
-        this.anims.create({
+        let ermineAni = this.anims.create({
             key: 'ermineAni',
             frames: this.anims.generateFrameNumbers('ermine', {
                 start: 0,
@@ -77,7 +77,7 @@ class GameScene extends Phaser.Scene {
         ermine.setCollideWorldBounds(true);
 
         //Snow Ball Animation
-        this.anims.create({
+        let snowballAni=this.anims.create({
             key: 'snowballAni',
             frames: this.anims.generateFrameNumbers('snowball', {
                 start: 0,
@@ -104,6 +104,12 @@ class GameScene extends Phaser.Scene {
                 snowball.anims.play('snowballAni', true);
                 this.physics.add.collider(ermine, snowGroup, () => {
                     this.scene.start('GameOver');
+                    snowballAni.destroy();
+                    ermineAni.destroy();
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
                 });
                 snowball.depth = snowball.y;
             },

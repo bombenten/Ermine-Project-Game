@@ -19,11 +19,12 @@ class GameOver extends Phaser.Scene {
             .setDepth(100);
         this.pointer = this.input.activePointer;
 
-        gameOver = this.physics.add.image(650, 350, 'gameOver')
+        gameOver = this.physics.add.image(630, 365, 'gameOver')
             .setScale(3);
         gameOver.setInteractive();
         gameOver.on('pointerdown', () => {
-            this.scene.start('GameScene')
+            // this.scene.restart('GameScene');
+            this.scene.start('GameScene');
         })
 
     }
