@@ -48,7 +48,7 @@ class GameScene extends Phaser.Scene {
         this.pointer = this.input.activePointer;
 
         //Create Image
-        frontBG = this.add.tileSprite(0, 0, 1600, 720, 'frontBG').setOrigin(0, 0);
+        frontBG = this.add.tileSprite(0, 0, 1280, 720, 'frontBG').setOrigin(0,-5.5).setScale(1,0.161).setDepth(100);
         middleBG = this.add.tileSprite(0, 0, 1280, 720, 'middleBG').setOrigin(0, 0);
         skybox = this.physics.add.image(0, 0, 'skyblock')
             .setScale(5, 0.4)
