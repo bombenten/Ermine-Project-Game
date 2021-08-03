@@ -36,8 +36,8 @@ class GameOver extends Phaser.Scene {
         tryAgain.setInteractive();
         tryAgain.on('pointerdown', () => {
             this.scene.start('GameScene')
-
         })
+        
     }
 
 
