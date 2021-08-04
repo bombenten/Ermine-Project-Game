@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 
 let gameOver;
+let tryAgain;
 
 class GameOver extends Phaser.Scene {
     constructor(test) {
@@ -10,7 +11,9 @@ class GameOver extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('gameOver', 'src/image/gameOver (2).png');
+        this.load.image('gameOver', 'src/image/gameOver.png');
+        this.load.image('tryAgain', 'src/image/tryAgain.png');
+
     }
 
     create() {
@@ -23,10 +26,23 @@ class GameOver extends Phaser.Scene {
             .setScale(3);
         gameOver.setInteractive();
         gameOver.on('pointerdown', () => {
+<<<<<<< HEAD
             // this.scene.restart('GameScene');
             this.scene.start('GameScene');
+=======
+            location.reload();
+>>>>>>> Bomber
         })
 
+        tryAgain = this.physics.add.image(650, 450, 'tryAgain')
+            .setScale(0.7)
+            .setSize(415,85)
+            .setOffset(35,30);
+        tryAgain.setInteractive();
+        tryAgain.on('pointerdown', () => {
+            this.scene.start('GameScene')
+        })
+        
     }
 
 
