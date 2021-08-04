@@ -15,37 +15,27 @@ class LoadingBar extends Phaser.Scene {
         progressBar=this.add.graphics();
         progressBox=this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);
-        progressBox.fillRect(240, 270, 320, 50);
+        progressBox.fillRect((this.cameras.main.width / 2)-170, 270, 320, 50);
+        //240,270
+        this.load.image('logo','src/image/logo.png');
+        for (var i=0;i<300;i++){
+            this.load.image('logo_'+i,'src/image/logo.png');
+        }
 
-        this.load.on('progress',function (value){
-            // console.log(value);
+        this.load.on('progress',(percent)=>{
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
-            progressBar.fillRect(250, 280, 300 * value, 30);
+            progressBar.fillRect((this.cameras.main.width / 2)-160, 280, 300 * percent, 30);
+            //250,280
         });
 
-        // this.load.on('fileprogress', function (file) {
-        //     console.log(file.src);
-        // });
 
-        this.load.on('complete', function () {
+        this.load.on('complete', ()=>{
             // console.log('complete');
             progressBar.destroy();
             progressBox.destroy();
+            this.scene.start('GameScene');
         });
-        
-
-        this.load.image('logo','src/image/logo.png');
-        for (var i=0;i<500;i++){
-            this.load.image('logo'+i,'src/image/logo.png');
-        }
-    }
-
-    create() {
-        logo=this.add.image(640,360,'logo').setScale(0.05);
-    }
-
-    update(delta, time) {
     }
 }
 
