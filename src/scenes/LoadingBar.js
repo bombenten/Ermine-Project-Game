@@ -18,7 +18,7 @@ class LoadingBar extends Phaser.Scene {
         progressBox.fillRect((this.cameras.main.width / 2)-170, 270, 320, 50);
         //240,270
         this.load.image('logo','src/image/logo.png');
-        for (var i=0;i<300;i++){
+        for (var i=0;i<50;i++){
             this.load.image('logo_'+i,'src/image/logo.png');
         }
 

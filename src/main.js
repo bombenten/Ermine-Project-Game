@@ -2,12 +2,9 @@ import 'phaser';
 import Phaser from 'phaser';
 import GameScene from './scenes/GameScene';
 import GameOver from './scenes/GameOver';
-<<<<<<< HEAD
 import LoadingBar from './scenes/LoadingBar';
 import Default from './scenes/Defualt';
-=======
 import MainMenu from './scenes/MainMenu';
->>>>>>> Bomber
 
 
 const config = {
@@ -26,11 +23,8 @@ const config = {
         }
     },
     scene: [
-<<<<<<< HEAD
         LoadingBar,
-=======
         // MainMenu,
->>>>>>> Bomber
         GameScene,
         GameOver,
         Default

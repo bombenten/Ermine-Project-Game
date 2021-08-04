@@ -26,12 +26,8 @@ class GameOver extends Phaser.Scene {
             .setScale(3);
         gameOver.setInteractive();
         gameOver.on('pointerdown', () => {
-<<<<<<< HEAD
             // this.scene.restart('GameScene');
             this.scene.start('GameScene');
-=======
-            location.reload();
->>>>>>> Bomber
         })
 
         tryAgain = this.physics.add.image(650, 450, 'tryAgain')

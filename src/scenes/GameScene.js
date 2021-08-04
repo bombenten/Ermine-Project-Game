@@ -116,6 +116,7 @@ class GameScene extends Phaser.Scene {
                 this.physics.add.overlap(ermine, snowball, () => {
                     this.scene.start('GameOver');
                     snowballAni.destroy();
+                    snowmanAni.destroy();
                     ermineAni.destroy();
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -130,7 +131,7 @@ class GameScene extends Phaser.Scene {
         })
 
         //Snowman Ball Animation
-        this.anims.create({
+        let snowmanAni=this.anims.create({
             key: 'snowmanAni',
             frames: this.anims.generateFrameNumbers('snowman', {
                 start: 0,
@@ -158,6 +159,13 @@ class GameScene extends Phaser.Scene {
                 snowman.anims.play('snowmanAni', true);
                 this.physics.add.overlap(ermine, snowman, () => {
                     this.scene.start('GameOver');
+                    snowmanAni.destroy();
+                    snowballAni.destroy();
+                    ermineAni.destroy();
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
                 });
                 snowman.depth = snowman.y;
             },
