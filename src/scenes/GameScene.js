@@ -10,6 +10,8 @@ let skybox;
 let ermine;
 let snowball;
 let snowman;
+let Golem;
+let ermineATK;
 
 //Event
 let snowEvent;
@@ -45,6 +47,8 @@ class GameScene extends Phaser.Scene {
             { frameWidth: 300, frameHeight: 300 });
         this.load.spritesheet('snowman', 'src/image/Snowman.png',
             { frameWidth: 1000, frameHeight: 1000 });
+        this.load.spritesheet('ermineATK','src/image/scratch sprite.png',
+            {frameWidth: 500, frameHeight: 300});
 
     }
 
@@ -67,14 +71,13 @@ class GameScene extends Phaser.Scene {
             // .setScale(0.5)
             .setSize(250, 80)
             .setOffset(200, 150);
-        
+        ermineATK=this.physics.add.sprite(190,360,'ermineATK').setScale(0.5).setSize(250,80).setOffset(200,150).setVisible();
             //set hitbox เป็นวงกลม
         // snowman.body.setCircle(45); 
 
         //collider
         this.physics.add.collider(ermine, skybox);
         this.physics.add.collider(ermine,front);
-
 
 
         //ermine Animation
@@ -90,6 +93,18 @@ class GameScene extends Phaser.Scene {
         })
         ermine.anims.play('ermineAni', true);
         ermine.setCollideWorldBounds(true);
+
+        //ermineATK
+        let ermineAniATK=this.anims.create({
+            key: 'ermineAniATK',
+            frames: this.anims.generateFrameNumbers('ermineATK',{
+                start:0,
+                end:4
+            }),
+            duration:450,
+            framerate:1,
+            repeat:-1
+        });
 
         //Snow Ball Animation
         let snowballAni=this.anims.create({
@@ -184,7 +199,7 @@ class GameScene extends Phaser.Scene {
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        //  keyAtk = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyAtk = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     }
 
@@ -215,6 +230,12 @@ class GameScene extends Phaser.Scene {
             ermine.setVelocityX(300);
         } else {
             ermine.setVelocityX(0);
+        }
+        if(keyAtk.isDown){
+            ermineATK.anims.play('ermineAniATK', true);
+        }
+        else{
+            ermineATK.anims.play('ermineAniATK', false);
         }
 
         //destroy snowGroup when x = -150
