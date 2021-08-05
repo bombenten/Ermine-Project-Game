@@ -1,8 +1,9 @@
 import Phaser from "phaser";
 
 //BG
-let frontBG;
-let middleBG;
+let foreGround;
+let middleGround;
+let backGround;
 let skybox;
 
 //Character
@@ -33,8 +34,9 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         //Back ground
-        this.load.image('frontBG', 'src/image/front ground.png');
-        this.load.image('middleBG', 'src/image/middle ground.png');
+        this.load.image('foreGround', 'src/image/FG ermine.png');
+        this.load.image('middleGround', 'src/image/MG ermine.png');
+        this.load.image('backGround', 'src/image/BG ermine.png');
         this.load.image('skyblock', 'src/image/SkyBlock.png');
 
         //Animation
@@ -54,10 +56,18 @@ class GameScene extends Phaser.Scene {
         this.pointer = this.input.activePointer;
 
         //Create Image
-        frontBG = this.add.tileSprite(0, 0, 1600, 720, 'frontBG').setOrigin(0, 0);
-        middleBG = this.add.tileSprite(0, 0, 1280, 720, 'middleBG').setOrigin(0, 0);
+        foreGround = this.add.tileSprite(0, 0, 1600, 720, 'foreGround')
+            .setOrigin(0, 0)
+            .setDepth(3);
+        middleGround = this.add.tileSprite(0, -300, 1280, 720, 'middleGround')
+            .setOrigin(0, 0)
+            .setDepth(1)
+            .setScale(1,1.5);
+        backGround = this.add.tileSprite(0, -150, 1280, 720, 'backGround')
+            .setOrigin(0, 0)
+            .setDepth(3);
         skybox = this.physics.add.image(0, 0, 'skyblock')
-            .setScale(5, 0.4)
+            .setScale(5, 0.8)
             .setVisible()
             .setImmovable();
         ermine = this.physics.add.sprite(190, 360, 'ermine').setScale(0.5)
@@ -180,8 +190,9 @@ class GameScene extends Phaser.Scene {
         ermine.depth = ermine.y - (ermine.height - 254);
 
         //BG Tile Sprite
-        frontBG.tilePositionX += 3;
-        middleBG.tilePositionX += 3;
+        foreGround.tilePositionX += 10;
+        middleGround.tilePositionX += 6;
+        backGround.tilePositionX += 3;
 
         //Input from keyboard
         if (keyW.isDown) {
@@ -201,14 +212,14 @@ class GameScene extends Phaser.Scene {
 
         //destroy snowGroup when x = -150
         for (let i = 0; i < snowGroup.getChildren().length; i++) {
-            if (snowGroup.getChildren()[i].x < -150) {
+            if (snowGroup.getChildren()[i].x < 550) {
                 snowGroup.getChildren()[i].destroy();
             }
         }
 
         //destroy snowManGroup when x = -150
         for (let i = 0; i < snowManGroup.getChildren().length; i++) {
-            if (snowManGroup.getChildren()[i].x < -150) {
+            if (snowManGroup.getChildren()[i].x < 550) {
                 snowManGroup.getChildren()[i].destroy();
             }
         }
