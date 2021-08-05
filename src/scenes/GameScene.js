@@ -155,7 +155,34 @@ class GameScene extends Phaser.Scene {
                 snowball.setVelocityX(Phaser.Math.Between(-200, -500));
                 snowball.anims.play('snowballAni', true);
                 this.physics.add.overlap(ermine, snowball, () => {
-                    this.scene.start('GameOver');
+                    if(ermine.immortal == false){
+                        playerHeart--;
+                        if(playerHeart <=0){
+                            this.scene.start('GameOver');
+                        }
+                        for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
+                            if(playerHeart <i+1){
+                                heartGroup.getChildren()[i].setVisible(false);
+                            }
+                            else{
+                                heartGroup.getChildren()[i].setVisible(true);                  
+                            }
+                        }
+                        ermine.immortal = true;
+                        ermine.flickerTimer = this.time.addEvent({
+                            delay: 100,
+                            callback: function() {
+                                ermine.setVisible(!ermine.visible);
+                                if(ermine.flickerTimer.repeatCount == 0){
+                                    ermine.immortal = false;
+                                    ermine.setVisible(true);
+                                    ermine.flickerTimer.remove();
+                                }
+                            },
+                            repeat: 15
+                        });
+                    }
+
                 });
                 snowball.depth = snowball.y;
             },
@@ -273,14 +300,14 @@ class GameScene extends Phaser.Scene {
 
         //destroy snowGroup when x = -150
         for (let i = 0; i < snowGroup.getChildren().length; i++) {
-            if (snowGroup.getChildren()[i].x < 550) {
+            if (snowGroup.getChildren()[i].x < -150) {
                 snowGroup.getChildren()[i].destroy();
             }
         }
 
         //destroy snowManGroup when x = -150
         for (let i = 0; i < snowManGroup.getChildren().length; i++) {
-            if (snowManGroup.getChildren()[i].x < 550) {
+            if (snowManGroup.getChildren()[i].x < -150) {
                 snowManGroup.getChildren()[i].destroy();
             }
         }
@@ -289,5 +316,6 @@ class GameScene extends Phaser.Scene {
     }
 
 }
+
 
 export default GameScene;
