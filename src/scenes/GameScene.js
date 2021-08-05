@@ -2,6 +2,7 @@ import Phaser from "phaser";
 
 //BG
 let frontBG;
+let front;
 let middleBG;
 let skybox;
 
@@ -54,14 +55,16 @@ class GameScene extends Phaser.Scene {
         this.pointer = this.input.activePointer;
 
         //Create Image
-        frontBG = this.add.tileSprite(0, 0, 1280, 720, 'frontBG').setOrigin(0,-5.5).setScale(1,0.161).setDepth(100);
+        frontBG = this.add.tileSprite(0, 0, 1280, 720, 'frontBG').setOrigin(0,-5.5).setScale(1,0.161).setDepth(1000);
+        front = this.physics.add.image(1280, 720, 'frontBG').setOrigin(0,-5.5).setScale(1,0.161).setDepth(100)
+            .setImmovable().setVisible().setOffset(200, 50);;
         middleBG = this.add.tileSprite(0, 0, 1280, 720, 'middleBG').setOrigin(0, 0);
         skybox = this.physics.add.image(0, 0, 'skyblock')
             .setScale(5, 0.4)
             .setVisible()
             .setImmovable();
         ermine = this.physics.add.sprite(190, 360, 'ermine').setScale(0.5)
-            .setScale(0.5)
+            // .setScale(0.5)
             .setSize(250, 80)
             .setOffset(200, 150);
         
@@ -70,6 +73,7 @@ class GameScene extends Phaser.Scene {
 
         //collider
         this.physics.add.collider(ermine, skybox);
+        this.physics.add.collider(ermine,front);
 
 
 

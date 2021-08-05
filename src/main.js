@@ -23,7 +23,7 @@ const config = {
         }
     },
     scene: [
-        LoadingBar,
+        // LoadingBar,
         // MainMenu,
         GameScene,
         GameOver,
