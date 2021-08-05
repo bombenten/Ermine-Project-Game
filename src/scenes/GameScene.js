@@ -63,7 +63,7 @@ class GameScene extends Phaser.Scene {
         //Create Image
         foreGround = this.add.tileSprite(0, 0, 1600, 720, 'foreGround')
             .setOrigin(0, 0)
-            .setDepth(3);
+            .setDepth(3000);
         middleGround = this.add.tileSprite(0, -300, 1280, 720, 'middleGround')
             .setOrigin(0, 0)
             .setDepth(1)
