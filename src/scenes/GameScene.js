@@ -158,7 +158,9 @@ class GameScene extends Phaser.Scene {
                     if(ermine.immortal == false){
                         playerHeart--;
                         if(playerHeart <=0){
+                            this.scene.restart(playerHeart = 3);
                             this.scene.start('GameOver');
+                            
                         }
                         for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
                             if(playerHeart <i+1){
@@ -223,7 +225,9 @@ class GameScene extends Phaser.Scene {
                         snowman.destroy();
                         playerHeart--;
                         if(playerHeart <=0){
+                            this.scene.restart(playerHeart = 3);
                             this.scene.start('GameOver');
+                            
                         }
                         for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
                             if(playerHeart <i+1){
