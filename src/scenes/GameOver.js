@@ -2,6 +2,7 @@ import Phaser from "phaser";
 
 let gameOver;
 let tryAgain;
+let playerHeart = 3;
 
 class GameOver extends Phaser.Scene {
     constructor(test) {
@@ -35,6 +36,7 @@ class GameOver extends Phaser.Scene {
             .setOffset(35,30);
         tryAgain.setInteractive();
         tryAgain.on('pointerdown', () => {
+            // this.scene.restart('GameScene')
             this.scene.start('GameScene')
         })
         
@@ -45,7 +47,6 @@ class GameOver extends Phaser.Scene {
     update(delta, time) {
         //Show X Y
         this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')');
-
 
     }
 }
