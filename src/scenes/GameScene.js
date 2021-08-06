@@ -176,12 +176,14 @@ class GameScene extends Phaser.Scene {
                             snowmanAni.destroy();
                             ermineAni.destroy();
                             ermineAniATK.destroy();
-                            // HeartAni.destroy();
+                            HeartAni.destroy();
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+                            playerHeart=3;
+                            Heart();
                         }
                         for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
                             if(playerHeart <i+1){
@@ -250,12 +252,13 @@ class GameScene extends Phaser.Scene {
                             snowballAni.destroy();
                             ermineAni.destroy();
                             ermineAniATK.destroy();
-                            // HeartAni.destroy();
+                            HeartAni.destroy();
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+                            playerHeart=3;
                         }
                         for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
                             if(playerHeart <i+1){
@@ -364,6 +367,33 @@ class GameScene extends Phaser.Scene {
     }
 
 }
+
+// function Heart (){
+//    //Heart Group
+//    heartGroup = this.physics.add.group();
+        
+//    //heart Animation
+//    let HeartAni=this.anims.create({
+//        key: 'heartAni',
+//        frames: this.anims.generateFrameNumbers('heart', {
+//            start: 0,
+//            end: 7
+//        }),
+//        duration: 450,
+//        framerate: 60,
+//        repeat: -1
+//    })
+
+//    //Heart
+//    for(let i = 0 ; i < playerHeart ; i++){
+//        heart = this.physics.add.sprite(30 +(i*45), 250, 'heart')
+//            .setDepth(100000)
+//            .setScale(0.75);
+//            heartGroup.add(heart);
+//            heart.anims.play('heartAni', true);
+//    }
+
+// }
 
 
 export default GameScene;
