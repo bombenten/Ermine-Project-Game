@@ -68,17 +68,15 @@ class GameScene extends Phaser.Scene {
             .setVisible()
             .setImmovable();
         ermine = this.physics.add.sprite(190, 360, 'ermine').setScale(0.5)
-            // .setScale(0.5)
             .setSize(250, 80)
             .setOffset(200, 150);
-        ermineATK=this.physics.add.sprite(190,360,'ermineATK').setScale(0.5).setSize(250,80).setOffset(200,150).setVisible();
-            //set hitbox เป็นวงกลม
-        // snowman.body.setCircle(45); 
+        ermineATK=this.physics.add.sprite(190,360,'ermineATK').setScale(0.5).setSize(250,80).setOffset(200,150).setVisible(true);
 
         //collider
         this.physics.add.collider(ermine, skybox);
         this.physics.add.collider(ermine,front);
-
+        this.physics.add.collider(ermineATK,skybox);
+        this.physics.add.collider(ermineATK,front);
 
         //ermine Animation
         let ermineAni = this.anims.create({
@@ -137,10 +135,12 @@ class GameScene extends Phaser.Scene {
                     snowballAni.destroy();
                     snowmanAni.destroy();
                     ermineAni.destroy();
+                    ermineAniATK.destroy();
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
                 });
                 snowball.depth = snowball.y;
             },
@@ -181,10 +181,12 @@ class GameScene extends Phaser.Scene {
                     snowmanAni.destroy();
                     snowballAni.destroy();
                     ermineAni.destroy();
+                    ermineAniATK.destroy();
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
+                    this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
                 });
                 snowman.depth = snowman.y;
             },
@@ -211,6 +213,7 @@ class GameScene extends Phaser.Scene {
 
         //set Depth ermine
         ermine.depth = ermine.y - (ermine.height - 254);
+        ermineATK.depth=ermineATK.y -(ermineATK.height -254);
 
         //BG Tile Sprite
         frontBG.tilePositionX += 3;
@@ -219,23 +222,33 @@ class GameScene extends Phaser.Scene {
         //Input from keyboard
         if (keyW.isDown) {
             ermine.setVelocityY(-200);
+            ermineATK.setVelocityY(-200);
         } else if (keyS.isDown) {
             ermine.setVelocityY(200);
+            ermineATK.setVelocityY(200);
         } else {
             ermine.setVelocityY(0);
+            ermineATK.setVelocityY(0);
         }
         if (keyA.isDown) {
             ermine.setVelocityX(-300);
+            ermineATK.setVelocityX(-300);
         } else if (keyD.isDown) {
             ermine.setVelocityX(300);
+            ermineATK.setVelocityX(300);
         } else {
             ermine.setVelocityX(0);
+            ermineATK.setVelocityX(0);
         }
         if(keyAtk.isDown){
             ermineATK.anims.play('ermineAniATK', true);
+            ermineATK.setVisible(true);
+            ermine.setVisible(false);
         }
         else{
             ermineATK.anims.play('ermineAniATK', false);
+            ermine.setVisible(true);
+            ermineATK.setVisible(false);
         }
 
         //destroy snowGroup when x = -150
