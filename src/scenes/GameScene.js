@@ -183,7 +183,6 @@ class GameScene extends Phaser.Scene {
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
                             playerHeart=3;
-                            Heart();
                         }
                         for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
                             if(playerHeart <i+1){
