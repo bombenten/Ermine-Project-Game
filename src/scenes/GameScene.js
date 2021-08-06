@@ -1,17 +1,29 @@
 import Phaser from "phaser";
 
 //BG
+<<<<<<< HEAD
 let frontBG;
 let front;
 let middleBG;
+=======
+let foreGround;
+let middleGround;
+let backGround;
+>>>>>>> Bomber
 let skybox;
 
 //Character
 let ermine;
 let snowball;
 let snowman;
+<<<<<<< HEAD
 let Golem;
 let ermineATK;
+=======
+let heart;
+let playerHeart = 3;
+let heartGroup;
+>>>>>>> Bomber
 
 //Event
 let snowEvent;
@@ -36,8 +48,9 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         //Back ground
-        this.load.image('frontBG', 'src/image/front ground.png');
-        this.load.image('middleBG', 'src/image/middle ground.png');
+        this.load.image('foreGround', 'src/image/FG ermine.png');
+        this.load.image('middleGround', 'src/image/MG ermine.png');
+        this.load.image('backGround', 'src/image/BG ermine.png');
         this.load.image('skyblock', 'src/image/SkyBlock.png');
 
         //Animation
@@ -47,8 +60,13 @@ class GameScene extends Phaser.Scene {
             { frameWidth: 300, frameHeight: 300 });
         this.load.spritesheet('snowman', 'src/image/Snowman.png',
             { frameWidth: 1000, frameHeight: 1000 });
+<<<<<<< HEAD
         this.load.spritesheet('ermineATK','src/image/scratch sprite.png',
             {frameWidth: 500, frameHeight: 300});
+=======
+        this.load.spritesheet('heart', 'src/image/heart.png',
+            { frameWidth: 64, frameHeight: 66 });    
+>>>>>>> Bomber
 
     }
 
@@ -59,17 +77,31 @@ class GameScene extends Phaser.Scene {
         this.pointer = this.input.activePointer;
 
         //Create Image
+<<<<<<< HEAD
         frontBG = this.add.tileSprite(0, 0, 1280, 720, 'frontBG').setOrigin(0,-5.5).setScale(1,0.161).setDepth(1000);
         front = this.physics.add.image(1280, 720, 'frontBG').setOrigin(0,-5.5).setScale(1,0.161).setDepth(100)
             .setImmovable().setVisible().setOffset(200, 50);;
         middleBG = this.add.tileSprite(0, 0, 1280, 720, 'middleBG').setOrigin(0, 0);
+=======
+        foreGround = this.add.tileSprite(0, 0, 1600, 720, 'foreGround')
+            .setOrigin(0, 0)
+            .setDepth(3000);
+        middleGround = this.add.tileSprite(0, -300, 1280, 720, 'middleGround')
+            .setOrigin(0, 0)
+            .setDepth(1)
+            .setScale(1,1.5);
+        backGround = this.add.tileSprite(0, -150, 1280, 720, 'backGround')
+            .setOrigin(0, 0)
+            .setDepth(3);
+>>>>>>> Bomber
         skybox = this.physics.add.image(0, 0, 'skyblock')
-            .setScale(5, 0.4)
+            .setScale(5, 0.8)
             .setVisible()
             .setImmovable();
         ermine = this.physics.add.sprite(190, 360, 'ermine').setScale(0.5)
             .setSize(250, 80)
             .setOffset(200, 150);
+<<<<<<< HEAD
         ermineATK=this.physics.add.sprite(190,360,'ermineATK').setScale(0.5).setSize(250,80).setOffset(200,150).setVisible(true);
 
         //collider
@@ -77,6 +109,43 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(ermine,front);
         this.physics.add.collider(ermineATK,skybox);
         this.physics.add.collider(ermineATK,front);
+=======
+        ermine.immortal = false;
+        // heart = this.physics.add.sprite(30, 250, 'heart')
+        // .setDepth(100000)
+        // .setScale(0.75);
+        
+            //set hitbox เป็นวงกลม
+        // snowman.body.setCircle(45); 
+
+        //collider
+        this.physics.add.collider(ermine, skybox);
+
+        //Heart Group
+        heartGroup = this.physics.add.group();
+        
+        //heart Animation
+        this.anims.create({
+            key: 'heartAni',
+            frames: this.anims.generateFrameNumbers('heart', {
+                start: 0,
+                end: 7
+            }),
+            duration: 450,
+            framerate: 60,
+            repeat: -1
+        })
+
+        //Heart
+        for(let i = 0 ; i < playerHeart ; i++){
+            heart = this.physics.add.sprite(30 +(i*45), 250, 'heart')
+                .setDepth(100000)
+                .setScale(0.75);
+                heartGroup.add(heart);
+                heart.anims.play('heartAni', true);
+        }
+        
+>>>>>>> Bomber
 
         //ermine Animation
         let ermineAni = this.anims.create({
@@ -131,6 +200,7 @@ class GameScene extends Phaser.Scene {
                 snowball.setVelocityX(Phaser.Math.Between(-200, -500));
                 snowball.anims.play('snowballAni', true);
                 this.physics.add.overlap(ermine, snowball, () => {
+<<<<<<< HEAD
                     this.scene.start('GameOver');
                     snowballAni.destroy();
                     snowmanAni.destroy();
@@ -141,6 +211,36 @@ class GameScene extends Phaser.Scene {
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+=======
+                    if(ermine.immortal == false){
+                        playerHeart--;
+                        if(playerHeart <=0){
+                            this.scene.start('GameOver');
+                        }
+                        for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
+                            if(playerHeart <i+1){
+                                heartGroup.getChildren()[i].setVisible(false);
+                            }
+                            else{
+                                heartGroup.getChildren()[i].setVisible(true);                  
+                            }
+                        }
+                        ermine.immortal = true;
+                        ermine.flickerTimer = this.time.addEvent({
+                            delay: 100,
+                            callback: function() {
+                                ermine.setVisible(!ermine.visible);
+                                if(ermine.flickerTimer.repeatCount == 0){
+                                    ermine.immortal = false;
+                                    ermine.setVisible(true);
+                                    ermine.flickerTimer.remove();
+                                }
+                            },
+                            repeat: 15
+                        });
+                    }
+
+>>>>>>> Bomber
                 });
                 snowball.depth = snowball.y;
             },
@@ -177,6 +277,7 @@ class GameScene extends Phaser.Scene {
                 snowman.setVelocityX(Phaser.Math.Between(-300, -800));
                 snowman.anims.play('snowmanAni', true);
                 this.physics.add.overlap(ermine, snowman, () => {
+<<<<<<< HEAD
                     this.scene.start('GameOver');
                     snowmanAni.destroy();
                     snowballAni.destroy();
@@ -187,6 +288,37 @@ class GameScene extends Phaser.Scene {
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
                     this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+=======
+                    if(ermine.immortal == false){
+                        snowman.destroy();
+                        playerHeart--;
+                        if(playerHeart <=0){
+                            this.scene.start('GameOver');
+                        }
+                        for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
+                            if(playerHeart <i+1){
+                                heartGroup.getChildren()[i].setVisible(false);
+                            }
+                            else{
+                                heartGroup.getChildren()[i].setVisible(true);                  
+                            }
+                        }
+                        ermine.immortal = true;
+                        ermine.flickerTimer = this.time.addEvent({
+                            delay: 100,
+                            callback: function() {
+                                ermine.setVisible(!ermine.visible);
+                                if(ermine.flickerTimer.repeatCount == 0){
+                                    ermine.immortal = false;
+                                    ermine.setVisible(true);
+                                    ermine.flickerTimer.remove();
+                                }
+                            },
+                            repeat: 15
+                        });
+                    }
+
+>>>>>>> Bomber
                 });
                 snowman.depth = snowman.y;
             },
@@ -209,15 +341,18 @@ class GameScene extends Phaser.Scene {
 
     update(delta, time) {
         //Show X Y
-        this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')');
+        this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')' + playerHeart);
+        
+        
 
         //set Depth ermine
         ermine.depth = ermine.y - (ermine.height - 254);
         ermineATK.depth=ermineATK.y -(ermineATK.height -254);
 
         //BG Tile Sprite
-        frontBG.tilePositionX += 3;
-        middleBG.tilePositionX += 3;
+        foreGround.tilePositionX += 10;
+        middleGround.tilePositionX += 6;
+        backGround.tilePositionX += 3;
 
         //Input from keyboard
         if (keyW.isDown) {
@@ -267,6 +402,8 @@ class GameScene extends Phaser.Scene {
 
 
     }
+
 }
+
 
 export default GameScene;
