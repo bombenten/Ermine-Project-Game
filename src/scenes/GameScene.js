@@ -55,12 +55,7 @@ class GameScene extends Phaser.Scene {
         this.load.spritesheet('ermineATK','src/image/scratch sprite.png',
             {frameWidth: 500, frameHeight: 300});
         this.load.spritesheet('heart', 'src/image/heart.png',
-<<<<<<< HEAD
             { frameWidth: 64, frameHeight: 66 }); 
-=======
-            { frameWidth: 64, frameHeight: 66 });
-
->>>>>>> Bomber
     }
 
     create() {
@@ -87,14 +82,11 @@ class GameScene extends Phaser.Scene {
         ermine = this.physics.add.sprite(190, 360, 'ermine').setScale(0.5)
             .setSize(250, 80)
             .setOffset(200, 150);
-<<<<<<< HEAD
-        ermineATK=this.physics.add.sprite(190,360,'ermineATK').setScale(0.5).setSize(250,80).setOffset(200,150).setVisible(true);
-=======
+        ermineATK=this.physics.add.sprite(190,360,'ermineATK').setScale(0.5)
+            .setSize(250,80)
+            .setOffset(200,150)
+            .setVisible(true);
         ermine.immortal = false;
-
-        //set hitbox เป็นวงกลม
-        // snowman.body.setCircle(45); 
->>>>>>> Bomber
 
         //collider
         this.physics.add.collider(ermine, skybox);
@@ -127,10 +119,6 @@ class GameScene extends Phaser.Scene {
             heartGroup.add(heart);
             heart.anims.play('heartAni', true);
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> Bomber
 
         //ermine Animation
         let ermineAni = this.anims.create({
@@ -157,6 +145,7 @@ class GameScene extends Phaser.Scene {
             framerate:1,
             repeat:-1
         });
+        ermineATK.setCollideWorldBounds(true);
 
         //Snow Ball Animation
         let snowballAni=this.anims.create({
@@ -188,9 +177,7 @@ class GameScene extends Phaser.Scene {
                     if (ermine.immortal == false) {
                         playerHeart--;
                         if (playerHeart <= 0) {
-                            this.scene.restart(playerHeart = 3);
                             this.scene.start('GameOver');
-<<<<<<< HEAD
                             snowballAni.destroy();
                             snowmanAni.destroy();
                             ermineAni.destroy();
@@ -201,10 +188,7 @@ class GameScene extends Phaser.Scene {
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-                            playerHeart=3;
-=======
-
->>>>>>> Bomber
+                            playerHeart = 3
                         }
                         for (let i = heartGroup.getChildren().length - 1; i >= 0; i--) {
                             if (playerHeart < i + 1) {
@@ -263,14 +247,15 @@ class GameScene extends Phaser.Scene {
                 snowManGroup.add(snowman);
                 snowman.setVelocityX(Phaser.Math.Between(-300, -800));
                 snowman.anims.play('snowmanAni', true);
+                // this.physics.add.overlap(ermineATK,snowman,()=>{
+                //     snowman.destroy();
+                // })
                 this.physics.add.overlap(ermine, snowman, () => {
                     if (ermine.immortal == false) {
                         snowman.destroy();
                         playerHeart--;
                         if (playerHeart <= 0) {
-                            this.scene.restart(playerHeart = 3);
                             this.scene.start('GameOver');
-<<<<<<< HEAD
                             snowmanAni.destroy();
                             snowballAni.destroy();
                             ermineAni.destroy();
@@ -281,10 +266,7 @@ class GameScene extends Phaser.Scene {
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
                             this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-                            playerHeart=3;
-=======
-
->>>>>>> Bomber
+                            playerHeart = 3
                         }
                         for (let i = heartGroup.getChildren().length - 1; i >= 0; i--) {
                             if (playerHeart < i + 1) {
@@ -316,17 +298,16 @@ class GameScene extends Phaser.Scene {
             paused: false
         })
 
-
         //Player Control
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyAtk = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
+        
+        
     }
-
-
+    
 
     update(delta, time) {
         //Show X Y
@@ -368,11 +349,14 @@ class GameScene extends Phaser.Scene {
             ermineATK.anims.play('ermineAniATK', true);
             ermineATK.setVisible(true);
             ermine.setVisible(false);
+            ermine.setActive(true);
         }
         else{
             ermineATK.anims.play('ermineAniATK', false);
             ermine.setVisible(true);
             ermineATK.setVisible(false);
+
+            
         }
 
         //destroy snowGroup when x = -150
@@ -391,36 +375,6 @@ class GameScene extends Phaser.Scene {
 
 
     }
-
 }
-
-// function Heart (){
-//    //Heart Group
-//    heartGroup = this.physics.add.group();
-        
-//    //heart Animation
-//    let HeartAni=this.anims.create({
-//        key: 'heartAni',
-//        frames: this.anims.generateFrameNumbers('heart', {
-//            start: 0,
-//            end: 7
-//        }),
-//        duration: 450,
-//        framerate: 60,
-//        repeat: -1
-//    })
-
-//    //Heart
-//    for(let i = 0 ; i < playerHeart ; i++){
-//        heart = this.physics.add.sprite(30 +(i*45), 250, 'heart')
-//            .setDepth(100000)
-//            .setScale(0.75);
-//            heartGroup.add(heart);
-//            heart.anims.play('heartAni', true);
-//    }
-
-// }
-
-
 
 export default GameScene;
