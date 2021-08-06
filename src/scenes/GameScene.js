@@ -36,6 +36,7 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
+
         //Back ground
         this.load.image('foreGround', 'src/image/FG ermine.png');
         this.load.image('middleGround', 'src/image/MG ermine.png');
@@ -50,7 +51,7 @@ class GameScene extends Phaser.Scene {
         this.load.spritesheet('snowman', 'src/image/Snowman.png',
             { frameWidth: 1000, frameHeight: 1000 });
         this.load.spritesheet('heart', 'src/image/heart.png',
-            { frameWidth: 64, frameHeight: 66 });    
+            { frameWidth: 64, frameHeight: 66 });
 
     }
 
@@ -67,7 +68,7 @@ class GameScene extends Phaser.Scene {
         middleGround = this.add.tileSprite(0, -300, 1280, 720, 'middleGround')
             .setOrigin(0, 0)
             .setDepth(1)
-            .setScale(1,1.5);
+            .setScale(1, 1.5);
         backGround = this.add.tileSprite(0, -150, 1280, 720, 'backGround')
             .setOrigin(0, 0)
             .setDepth(3);
@@ -79,11 +80,8 @@ class GameScene extends Phaser.Scene {
             .setSize(250, 80)
             .setOffset(200, 150);
         ermine.immortal = false;
-        // heart = this.physics.add.sprite(30, 250, 'heart')
-        // .setDepth(100000)
-        // .setScale(0.75);
-        
-            //set hitbox เป็นวงกลม
+
+        //set hitbox เป็นวงกลม
         // snowman.body.setCircle(45); 
 
         //collider
@@ -91,7 +89,7 @@ class GameScene extends Phaser.Scene {
 
         //Heart Group
         heartGroup = this.physics.add.group();
-        
+
         //heart Animation
         this.anims.create({
             key: 'heartAni',
@@ -105,14 +103,14 @@ class GameScene extends Phaser.Scene {
         })
 
         //Heart
-        for(let i = 0 ; i < playerHeart ; i++){
-            heart = this.physics.add.sprite(30 +(i*45), 250, 'heart')
+        for (let i = 0; i < playerHeart; i++) {
+            heart = this.physics.add.sprite(30 + (i * 45), 250, 'heart')
                 .setDepth(100000)
                 .setScale(0.75);
-                heartGroup.add(heart);
-                heart.anims.play('heartAni', true);
+            heartGroup.add(heart);
+            heart.anims.play('heartAni', true);
         }
-        
+
 
         //ermine Animation
         this.anims.create({
@@ -139,7 +137,7 @@ class GameScene extends Phaser.Scene {
             framerate: 1,
             repeat: -1
         })
-        
+
         //create snow group for destroy
         snowGroup = this.physics.add.group();
 
@@ -155,27 +153,27 @@ class GameScene extends Phaser.Scene {
                 snowball.setVelocityX(Phaser.Math.Between(-200, -500));
                 snowball.anims.play('snowballAni', true);
                 this.physics.add.overlap(ermine, snowball, () => {
-                    if(ermine.immortal == false){
+                    if (ermine.immortal == false) {
                         playerHeart--;
-                        if(playerHeart <=0){
+                        if (playerHeart <= 0) {
                             this.scene.restart(playerHeart = 3);
                             this.scene.start('GameOver');
-                            
+
                         }
-                        for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
-                            if(playerHeart <i+1){
+                        for (let i = heartGroup.getChildren().length - 1; i >= 0; i--) {
+                            if (playerHeart < i + 1) {
                                 heartGroup.getChildren()[i].setVisible(false);
                             }
-                            else{
-                                heartGroup.getChildren()[i].setVisible(true);                  
+                            else {
+                                heartGroup.getChildren()[i].setVisible(true);
                             }
                         }
                         ermine.immortal = true;
                         ermine.flickerTimer = this.time.addEvent({
                             delay: 100,
-                            callback: function() {
+                            callback: function () {
                                 ermine.setVisible(!ermine.visible);
-                                if(ermine.flickerTimer.repeatCount == 0){
+                                if (ermine.flickerTimer.repeatCount == 0) {
                                     ermine.immortal = false;
                                     ermine.setVisible(true);
                                     ermine.flickerTimer.remove();
@@ -221,28 +219,28 @@ class GameScene extends Phaser.Scene {
                 snowman.setVelocityX(Phaser.Math.Between(-300, -800));
                 snowman.anims.play('snowmanAni', true);
                 this.physics.add.overlap(ermine, snowman, () => {
-                    if(ermine.immortal == false){
+                    if (ermine.immortal == false) {
                         snowman.destroy();
                         playerHeart--;
-                        if(playerHeart <=0){
+                        if (playerHeart <= 0) {
                             this.scene.restart(playerHeart = 3);
                             this.scene.start('GameOver');
-                            
+
                         }
-                        for(let i = heartGroup.getChildren().length - 1; i>=0;i--){
-                            if(playerHeart <i+1){
+                        for (let i = heartGroup.getChildren().length - 1; i >= 0; i--) {
+                            if (playerHeart < i + 1) {
                                 heartGroup.getChildren()[i].setVisible(false);
                             }
-                            else{
-                                heartGroup.getChildren()[i].setVisible(true);                  
+                            else {
+                                heartGroup.getChildren()[i].setVisible(true);
                             }
                         }
                         ermine.immortal = true;
                         ermine.flickerTimer = this.time.addEvent({
                             delay: 100,
-                            callback: function() {
+                            callback: function () {
                                 ermine.setVisible(!ermine.visible);
-                                if(ermine.flickerTimer.repeatCount == 0){
+                                if (ermine.flickerTimer.repeatCount == 0) {
                                     ermine.immortal = false;
                                     ermine.setVisible(true);
                                     ermine.flickerTimer.remove();
@@ -275,8 +273,8 @@ class GameScene extends Phaser.Scene {
     update(delta, time) {
         //Show X Y
         this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')' + playerHeart);
-        
-        
+
+
 
         //set Depth ermine
         ermine.depth = ermine.y - (ermine.height - 254);
@@ -320,6 +318,7 @@ class GameScene extends Phaser.Scene {
     }
 
 }
+
 
 
 export default GameScene;
