@@ -139,7 +139,7 @@ class GameScene extends Phaser.Scene {
                 start: 3,
                 end: 7
             }),
-            duration:450,
+            duration:300,
             framerate:1,
             repeat:-1
         });
@@ -317,7 +317,6 @@ class GameScene extends Phaser.Scene {
 
         //set Depth ermine
         ermine.depth = ermine.y - (ermine.height - 254);
-        // ermineATK.depth=ermineATK.y -(ermineATK.height -254);
 
         //BG Tile Sprite
         foreGround.tilePositionX += 10;
@@ -361,7 +360,7 @@ class GameScene extends Phaser.Scene {
 
         //destroy snowManGroup when x = -150
         for (let i = 0; i < snowManGroup.getChildren().length; i++) {
-            if (snowManGroup.getChildren()[i].x < -150) {
+            if (snowManGroup.getChildren()[i].x < -10) {
                 snowManGroup.getChildren()[i].destroy();
             }
         }
