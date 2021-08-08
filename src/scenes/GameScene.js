@@ -46,14 +46,14 @@ class GameScene extends Phaser.Scene {
         this.load.image('skyblock', 'src/image/SkyBlock.png');
 
         //Animation
-        this.load.spritesheet('ermine', 'src/image/ermine.png',
+        this.load.spritesheet('ermine', 'src/image/TestErmin.png',
             { frameWidth: 500, frameHeight: 300 });
         this.load.spritesheet('snowball', 'src/image/snowball.png',
             { frameWidth: 300, frameHeight: 300 });
         this.load.spritesheet('snowman', 'src/image/Snowman.png',
             { frameWidth: 1000, frameHeight: 1000 });
-        this.load.spritesheet('ermineATK','src/image/scratch sprite.png',
-            {frameWidth: 500, frameHeight: 300});
+        // this.load.spritesheet('ermineATK','src/image/scratch sprite.png'
+            // {frameWidth: 500, frameHeight: 300});
         this.load.spritesheet('heart', 'src/image/heart.png',
             { frameWidth: 64, frameHeight: 66 }); 
     }
@@ -82,19 +82,17 @@ class GameScene extends Phaser.Scene {
         ermine = this.physics.add.sprite(190, 360, 'ermine').setScale(0.5)
             .setSize(250, 80)
             .setOffset(200, 150);
-        ermineATK=this.physics.add.sprite(190,360,'ermineATK').setScale(0.5)
-            .setSize(250,80)
-            .setOffset(200,150)
-            .setVisible(true);
+        // ermineATK=this.physics.add.sprite(190,360,'ermineATK').setScale(0.5)
+        //     .setSize(250,80)
+        //     .setOffset(200,150)
+        //     .setVisible(true);
         ermine.immortal = false;
 
         //collider
         this.physics.add.collider(ermine, skybox);
         this.physics.add.collider(ermine,backGround);
-        this.physics.add.collider(ermineATK,skybox);
-        this.physics.add.collider(ermineATK,backGround);
-
-        ermine.immortal = false;
+        // this.physics.add.collider(ermineATK,skybox);
+        // this.physics.add.collider(ermineATK,backGround);
 
         //Heart Group
         heartGroup = this.physics.add.group();
@@ -128,7 +126,7 @@ class GameScene extends Phaser.Scene {
                 end: 2
             }),
             duration: 450,
-            framerate: 1,
+            framerate: 10,
             repeat: -1
         })
         ermine.anims.play('ermineAni', true);
@@ -137,15 +135,15 @@ class GameScene extends Phaser.Scene {
         //ermineATK
         let ermineAniATK=this.anims.create({
             key: 'ermineAniATK',
-            frames: this.anims.generateFrameNumbers('ermineATK',{
-                start:0,
-                end:4
+            frames: this.anims.generateFrameNumbers('ermine',{
+                start: 3,
+                end: 7
             }),
             duration:450,
             framerate:1,
             repeat:-1
         });
-        ermineATK.setCollideWorldBounds(true);
+    
 
         //Snow Ball Animation
         let snowballAni=this.anims.create({
@@ -317,7 +315,7 @@ class GameScene extends Phaser.Scene {
 
         //set Depth ermine
         ermine.depth = ermine.y - (ermine.height - 254);
-        ermineATK.depth=ermineATK.y -(ermineATK.height -254);
+        // ermineATK.depth=ermineATK.y -(ermineATK.height -254);
 
         //BG Tile Sprite
         foreGround.tilePositionX += 10;
@@ -327,36 +325,29 @@ class GameScene extends Phaser.Scene {
         //Input from keyboard
         if (keyW.isDown) {
             ermine.setVelocityY(-200);
-            ermineATK.setVelocityY(-200);
+            // ermineATK.setVelocityY(-200);
         } else if (keyS.isDown) {
             ermine.setVelocityY(200);
-            ermineATK.setVelocityY(200);
+            // ermineATK.setVelocityY(200);
         } else {
             ermine.setVelocityY(0);
-            ermineATK.setVelocityY(0);
+            // ermineATK.setVelocityY(0);
         }
         if (keyA.isDown) {
             ermine.setVelocityX(-300);
-            ermineATK.setVelocityX(-300);
+            // ermineATK.setVelocityX(-300);
         } else if (keyD.isDown) {
             ermine.setVelocityX(300);
-            ermineATK.setVelocityX(300);
+            // ermineATK.setVelocityX(300);
         } else {
             ermine.setVelocityX(0);
-            ermineATK.setVelocityX(0);
+            // ermineATK.setVelocityX(0);
         }
         if(keyAtk.isDown){
-            ermineATK.anims.play('ermineAniATK', true);
-            ermineATK.setVisible(true);
-            ermine.setVisible(false);
-            ermine.setActive(true);
+            ermine.anims.play('ermineAniATK',true);
         }
         else{
-            ermineATK.anims.play('ermineAniATK', false);
-            ermine.setVisible(true);
-            ermineATK.setVisible(false);
-
-            
+            ermine.anims.play('ermineAni',true);
         }
 
         //destroy snowGroup when x = -150
