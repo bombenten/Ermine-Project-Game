@@ -245,13 +245,14 @@ class GameScene extends Phaser.Scene {
                 snowManGroup.add(snowman);
                 snowman.setVelocityX(Phaser.Math.Between(-300, -800));
                 snowman.anims.play('snowmanAni', true);
-                // this.physics.add.overlap(ermineATK,snowman,()=>{
-                //     snowman.destroy();
-                // })
                 this.physics.add.overlap(ermine, snowman, () => {
                     if (ermine.immortal == false) {
                         snowman.destroy();
                         playerHeart--;
+                        if(ermine.anims.isPlaying && ermine.anims.currentAnim.key === 'ermineAniATK'){
+                            snowman.destroy();
+                            playerHeart++;
+                        }
                         if (playerHeart <= 0) {
                             this.scene.start('GameOver');
                             snowmanAni.destroy();
@@ -287,6 +288,7 @@ class GameScene extends Phaser.Scene {
                             },
                             repeat: 15
                         });
+                        
                     }
                 });
                 snowman.depth = snowman.y;
