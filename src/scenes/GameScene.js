@@ -75,6 +75,7 @@ class GameScene extends Phaser.Scene {
         backGround = this.add.tileSprite(0, -150, 1280, 720, 'backGround')
             .setOrigin(0, 0)
             .setDepth(3);
+            
         skybox = this.physics.add.image(0, 0, 'skyblock')
             .setScale(5, 0.8)
             .setVisible()
