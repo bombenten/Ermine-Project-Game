@@ -10,8 +10,10 @@ let middleGround;
 let foreGround;
 let gameLogo;
 let ermineMenu;
-let snowman;
-let golem;
+let ermineMenuFlip;
+let snowmanMenu1;
+let snowmanMenu2;
+let golemMenu;
 
 
 class MainMenu extends Phaser.Scene {
@@ -36,9 +38,9 @@ class MainMenu extends Phaser.Scene {
 
         this.load.spritesheet('ermineMenu', 'src/image/ermineAll.png',
             { frameWidth: 500, frameHeight: 300 });
-        this.load.spritesheet('snowman', 'src/image/Snowman.png',
+        this.load.spritesheet('snowmanMenu', 'src/image/Snowman.png',
             { frameWidth: 1000, frameHeight: 1000 });
-        this.load.spritesheet('golem','src/image/Golem-Sprite-sheet.png',{
+        this.load.spritesheet('golemMenu','src/image/Demo2/Demo2/Golem2_sprite.png',{
             frameWidth: 1000, frameHeight:1000});
         }
 
@@ -67,21 +69,52 @@ class MainMenu extends Phaser.Scene {
             .rotation= -0.3;
 
         ermineMenu = this.physics.add.sprite(-500, 450, 'ermineMenu')
-            .setScale(0.5)
+            .setScale(0.4)
             .setSize(250, 80)
             .setOffset(200, 150);
-            let ermineAni = this.anims.create({
-                key: 'ermineMenuAni',
-                frames: this.anims.generateFrameNumbers('ermineMenu', {
-                    start: 0,
-                    end: 3
-                }),
-                duration: 450,
-                framerate: 10,
-                repeat: -1
-            })
-            ermineMenu.anims.play('ermineMenuAni', true);
-            ermineMenu.setVelocityX(300);
+        ermineMenuFlip=this.physics.add.sprite(this.game.renderer.width+500,450,'erminMenu')
+            .setScale(0.4)
+            .setSize(250, 80)
+            .setOffset(200, 150)
+            .setFlipX(true);
+        
+        snowmanMenu1=this.physics.add.sprite(-300,350,'snowmanMenu')
+            .setScale(0.2)
+            .setSize(340, 145)
+            .setOffset(350, 765);
+        snowmanMenu2=this.physics.add.sprite(-300,450,'snowmanMenu')
+            .setScale(0.2)
+            .setSize(340, 145)
+            .setOffset(350, 765);
+            
+        let ermineAni = this.anims.create({
+            key: 'ermineMenuAni',
+            frames: this.anims.generateFrameNumbers('ermineMenu', {
+                start: 0,
+                end: 3
+            }),
+            duration: 450,
+            framerate: 10,
+            repeat: -1
+        })
+        ermineMenu.anims.play('ermineMenuAni', true);
+        ermineMenuFlip.anims.play('ermineMenuAni', true);
+        ermineMenu.setVelocityX(300);
+
+        let snowmanAni=this.anims.create({
+            key: 'snowmanMenuAni',
+            frames: this.anims.generateFrameNumbers('snowmanMenu', {
+                start: 0,
+                end: 7
+            }),
+            duration: 750,
+            framerate: 1,
+            repeat: -1
+        });
+        snowmanMenu1.anims.play('snowmanMenuAni', true);
+        snowmanMenu2.anims.play('snowmanMenuAni', true);
+        snowmanMenu1.setVelocityX(300);
+        snowmanMenu2.setVelocityX(300);
 
         play=this.physics.add.image(this.game.renderer.width/2,400,'play')
             .setSize(200,100);
@@ -89,19 +122,20 @@ class MainMenu extends Phaser.Scene {
         play.on('pointerdown',()=>{
             play.destroy();
             story = this.physics.add.image(this.game.renderer.width / 2 -200, 400, 'story')
-            .setSize(200,100);
+                .setSize(200,100);
             story.setInteractive();
             story.on('pointerdown', () => {
-                this.scene.start('Defualt');
+                this.scene.start('GameScene');
                 this.scene.destroy();
-                // this.ermineAni.ermineAni();
+                ermineAni.destroy();
+                snowmanAni.destroy();
             })
 
             arcade=this.physics.add.image(this.game.renderer.width/2+200,400,'arcade')
                 .setSize(200,100);
             arcade.setInteractive();
             arcade.on('pointerdown',()=>{
-                this.scene.start('Defualt');
+                this.scene.start('GameScene');
             })
         })
 
@@ -112,6 +146,7 @@ class MainMenu extends Phaser.Scene {
         howtoplay.on('pointerdown', () => {
             // this.scene.start('GameScene') //รอหน้า Tutorial
         });
+
     }
 
 
@@ -120,8 +155,10 @@ class MainMenu extends Phaser.Scene {
         //Show X Y
         this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')');
 
-        if(ermineMenu.x>this.game.renderer.width+200){
+        if(ermineMenu.x>this.game.renderer.width-500){
             ermineMenu.destroy();
+            snowmanMenu1.destroy();
+            snowmanMenu2.destroy();
         }
     }
 }

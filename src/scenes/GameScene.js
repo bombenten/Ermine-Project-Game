@@ -46,8 +46,8 @@ class GameScene extends Phaser.Scene {
         this.load.image('skyblock', 'src/image/SkyBlock.png');
 
         //Animation
-        // this.load.spritesheet('ermine', 'src/image/TestErmin.png',
-        //     { frameWidth: 500, frameHeight: 300 });
+        this.load.spritesheet('ermine', 'src/image/ErmineAll.png',
+            { frameWidth: 500, frameHeight: 300 });
         this.load.spritesheet('snowball', 'src/image/snowball.png',
             { frameWidth: 300, frameHeight: 300 });
         this.load.spritesheet('snowman', 'src/image/Snowman.png',
@@ -81,17 +81,11 @@ class GameScene extends Phaser.Scene {
         ermine = this.physics.add.sprite(190, 360, 'ermine').setScale(0.5)
             .setSize(250, 80)
             .setOffset(200, 150);
-        // ermineATK=this.physics.add.sprite(190,360,'ermineATK').setScale(0.5)
-        //     .setSize(250,80)
-        //     .setOffset(200,150)
-        //     .setVisible(true);
         ermine.immortal = false;
 
         //collider
         this.physics.add.collider(ermine, skybox);
         this.physics.add.collider(ermine,backGround);
-        // this.physics.add.collider(ermineATK,skybox);
-        // this.physics.add.collider(ermineATK,backGround);
 
         //Heart Group
         heartGroup = this.physics.add.group();
