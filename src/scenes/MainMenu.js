@@ -72,11 +72,12 @@ class MainMenu extends Phaser.Scene {
             .setScale(0.4)
             .setSize(250, 80)
             .setOffset(200, 150);
+
         ermineMenuFlip=this.physics.add.sprite(this.game.renderer.width+500,450,'erminMenu')
             .setScale(0.4)
             .setSize(250, 80)
             .setOffset(200, 150)
-            .setFlipX(true);
+            .setFlipX(true)//hitbox no position
         
         snowmanMenu1=this.physics.add.sprite(-300,350,'snowmanMenu')
             .setScale(0.2)
@@ -100,6 +101,7 @@ class MainMenu extends Phaser.Scene {
         ermineMenu.anims.play('ermineMenuAni', true);
         ermineMenuFlip.anims.play('ermineMenuAni', true);
         ermineMenu.setVelocityX(300);
+        
 
         let snowmanAni=this.anims.create({
             key: 'snowmanMenuAni',
@@ -155,10 +157,14 @@ class MainMenu extends Phaser.Scene {
         //Show X Y
         this.label.setText('(' + this.pointer.x + ', ' + this.pointer.y + ')');
 
-        if(ermineMenu.x>this.game.renderer.width-500){
+        if(ermineMenu.x>this.game.renderer.width+200){
             ermineMenu.destroy();
             snowmanMenu1.destroy();
             snowmanMenu2.destroy();
+            ermineMenuFlip.setVelocityX(-300);
+        }
+        else if(ermineMenuFlip.x<0){
+            ermineMenuFlip.destroy();
         }
     }
 }
