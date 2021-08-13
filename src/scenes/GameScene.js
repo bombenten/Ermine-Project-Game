@@ -46,14 +46,12 @@ class GameScene extends Phaser.Scene {
         this.load.image('skyblock', 'src/image/SkyBlock.png');
 
         //Animation
-        this.load.spritesheet('ermine', 'src/image/TestErmin.png',
-            { frameWidth: 500, frameHeight: 300 });
+        // this.load.spritesheet('ermine', 'src/image/TestErmin.png',
+        //     { frameWidth: 500, frameHeight: 300 });
         this.load.spritesheet('snowball', 'src/image/snowball.png',
             { frameWidth: 300, frameHeight: 300 });
         this.load.spritesheet('snowman', 'src/image/Snowman.png',
             { frameWidth: 1000, frameHeight: 1000 });
-        // this.load.spritesheet('ermineATK','src/image/scratch sprite.png'
-            // {frameWidth: 500, frameHeight: 300});
         this.load.spritesheet('heart', 'src/image/heart.png',
             { frameWidth: 64, frameHeight: 66 }); 
     }
