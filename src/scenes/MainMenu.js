@@ -312,15 +312,12 @@ class MainMenu extends Phaser.Scene {
 
         //Play Button
         play = this.physics.add.image(this.game.renderer.width / 2, 400, 'play')
-            .setSize(235, 105)
-            .setOffset(110, 95)
             .setDepth(100);
         play.setInteractive();
         play.on('pointerup', () => {
             play.destroy();
             //Story Button
             story = this.physics.add.image(this.game.renderer.width / 2 - 200, 400, 'story')
-                .setSize(200, 100)
                 .setDepth(100);
             story.setInteractive();
             story.on('pointerup', () => {
@@ -331,7 +328,6 @@ class MainMenu extends Phaser.Scene {
             })
             //Arcade Buttlon
             arcade = this.physics.add.image(this.game.renderer.width / 2 + 200, 400, 'arcade')
-                .setSize(200, 100)
                 .setDepth(100);
             arcade.setInteractive();
             arcade.on('pointerdown', () => {
@@ -340,7 +336,6 @@ class MainMenu extends Phaser.Scene {
         })
         //How to play Button
         howtoplay = this.physics.add.image(this.game.renderer.width / 2, 540, 'howtoplay')
-            .setSize(400, 100)
             .setScale(0.8)
             .setDepth(100);
         howtoplay.setInteractive();
@@ -364,8 +359,6 @@ class MainMenu extends Phaser.Scene {
         for (let i = 0; i < firstGroup.getChildren().length; i++) {
             if (firstGroup.getChildren()[i].x > 1400) {
                 firstGroup.getChildren()[i].destroy();
-                // firstEvent.paused = true;
-                // secoundEvent.paused = false;
             }
         }
 
@@ -373,8 +366,6 @@ class MainMenu extends Phaser.Scene {
         for (let i = 0; i < secoundGroup.getChildren().length; i++) {
             if (secoundGroup.getChildren()[i].x < -100) {
                 secoundGroup.getChildren()[i].destroy();
-                // secoundEvent.paused = true;
-                // thirdEvent.paused = false;
             }
         }
 
@@ -382,8 +373,6 @@ class MainMenu extends Phaser.Scene {
         for (let i = 0; i < thirdGroup.getChildren().length; i++) {
             if (thirdGroup.getChildren()[i].x > 1400) {
                 thirdGroup.getChildren()[i].destroy();
-                // thirdEvent.paused = true;
-                // fourthEvent.paused = false;
             }
         }
 
@@ -391,8 +380,6 @@ class MainMenu extends Phaser.Scene {
         for (let i = 0; i < fourthGroup.getChildren().length; i++) {
             if (fourthGroup.getChildren()[i].x < -100) {
                 fourthGroup.getChildren()[i].destroy();
-                // fourthEvent.paused = true;
-                // firstEvent.paused = false;
             }
         }
     }
