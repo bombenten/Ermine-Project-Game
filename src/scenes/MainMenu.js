@@ -138,7 +138,6 @@ class MainMenu extends Phaser.Scene {
             repeat: -1
         });
 
-
         //First Round
         firstGroup = this.physics.add.group();
         firstEvent = this.time.addEvent({
@@ -269,21 +268,21 @@ class MainMenu extends Phaser.Scene {
                     .setSize(250, 80)
                     .setOffset(200, 150)
                     .setFlipX(true);
-                golemMenu = this.physics.add.sprite(1280 + 300, 400, 'golemMenu')
-                    .setScale(0.2)
+                golemMenu = this.physics.add.sprite(1280 + 350, 350, 'golemMenu')
+                    .setScale(0.4)
                     .setSize(340, 145)
                     .setOffset(350, 765)
-                snowmanMenu1 = this.physics.add.sprite(1280 + 550, 400, 'snowmanMenu')
-                    .setScale(0.2)
-                    .setSize(340, 145)
-                    .setOffset(350, 765)
-                    .setFlipX(true);
-                snowmanMenu2 = this.physics.add.sprite(1280 + 450, 350, 'snowmanMenu')
+                snowmanMenu1 = this.physics.add.sprite(1280 + 680, 400, 'snowmanMenu')
                     .setScale(0.2)
                     .setSize(340, 145)
                     .setOffset(350, 765)
                     .setFlipX(true);
-                snowmanMenu3 = this.physics.add.sprite(1280 + 450, 450, 'snowmanMenu')
+                snowmanMenu2 = this.physics.add.sprite(1280 + 580, 350, 'snowmanMenu')
+                    .setScale(0.2)
+                    .setSize(340, 145)
+                    .setOffset(350, 765)
+                    .setFlipX(true);
+                snowmanMenu3 = this.physics.add.sprite(1280 + 580, 450, 'snowmanMenu')
                     .setScale(0.2)
                     .setSize(340, 145)
                     .setOffset(350, 765)
