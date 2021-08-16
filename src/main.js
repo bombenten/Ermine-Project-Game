@@ -24,10 +24,10 @@ const config = {
     },
     scene: [
         // LoadingBar,
-        MainMenu,
+        // MainMenu,
         GameScene,
         GameOver,
-        Default
+        // Default
     ],
 
 };

@@ -82,6 +82,7 @@ class GameScene extends Phaser.Scene {
             .setSize(250, 80)
             .setOffset(200, 150);
         ermine.immortal = false;
+        ermine.body.enable=true;
 
         //collider
         this.physics.add.collider(ermine, skybox);
@@ -239,49 +240,58 @@ class GameScene extends Phaser.Scene {
                 snowman.setVelocityX(Phaser.Math.Between(-300, -800));
                 snowman.anims.play('snowmanAni', true);
                 this.physics.add.overlap(ermine, snowman, () => {
-                    if (ermine.immortal == false) {
-                        snowman.destroy();
-                        playerHeart--;
-                        if(ermine.anims.isPlaying && ermine.anims.currentAnim.key === 'ermineAniATK'){
+                    if(ermine.body.enable){
+                        if(ermine.anims.isPlaying && ermine.anims.currentAnim.key == 'ermineAniATK'){
                             snowman.destroy();
                             playerHeart++;
+                            ermine.immortal=true;
                         }
-                        if (playerHeart <= 0) {
-                            this.scene.start('GameOver');
-                            snowmanAni.destroy();
-                            snowballAni.destroy();
-                            ermineAni.destroy();
-                            ermineAniATK.destroy();
-                            HeartAni.destroy();
-                            this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
-                            this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
-                            this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
-                            this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
-                            this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-                            playerHeart = 3
-                        }
-                        for (let i = heartGroup.getChildren().length - 1; i >= 0; i--) {
-                            if (playerHeart < i + 1) {
-                                heartGroup.getChildren()[i].setVisible(false);
+                        if (ermine.immortal == false) {
+                            snowman.destroy();
+                            playerHeart--;
+                            if (playerHeart <= 0) {
+                                this.scene.start('GameOver');
+                                snowmanAni.destroy();
+                                snowballAni.destroy();
+                                ermineAni.destroy();
+                                ermineAniATK.destroy();
+                                HeartAni.destroy();
+                                this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
+                                this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
+                                this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
+                                this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
+                                this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+                                playerHeart = 3
                             }
-                            else {
-                                heartGroup.getChildren()[i].setVisible(true);
-                            }
-                        }
-                        ermine.immortal = true;
-                        ermine.flickerTimer = this.time.addEvent({
-                            delay: 100,
-                            callback: function () {
-                                ermine.setVisible(!ermine.visible);
-                                if (ermine.flickerTimer.repeatCount == 0) {
-                                    ermine.immortal = false;
-                                    ermine.setVisible(true);
-                                    ermine.flickerTimer.remove();
+                            for (let i = heartGroup.getChildren().length - 1; i >= 0; i--) {
+                                if (playerHeart < i + 1) {
+                                    heartGroup.getChildren()[i].setVisible(false);
                                 }
-                            },
-                            repeat: 15
-                        });
-                        
+                                else {
+                                    heartGroup.getChildren()[i].setVisible(true);
+                                }   
+                            }
+                            ermine.immortal = true;
+                            ermine.flickerTimer = this.time.addEvent({
+                                delay: 100,
+                                callback: function () {
+                                    ermine.setVisible(!ermine.visible);
+                                    if (ermine.flickerTimer.repeatCount == 0) {
+                                        ermine.immortal = false;
+                                        ermine.setVisible(true);
+                                        ermine.flickerTimer.remove();
+                                    }
+                                },  
+                                repeat: 15
+                            });
+                        }
+                        // else if(ermine.anims.isPlaying && ermine.anims.currentAnim.key === 'ermineAniATK'){
+                        //     snowman.destroy();
+                        //     playerHeart++;
+                        // }
+                        // else{
+                        //     ermine.body.enable=true;
+                        // }
                     }
                 });
                 snowman.depth = snowman.y;
@@ -319,23 +329,17 @@ class GameScene extends Phaser.Scene {
         //Input from keyboard
         if (keyW.isDown) {
             ermine.setVelocityY(-200);
-            // ermineATK.setVelocityY(-200);
         } else if (keyS.isDown) {
             ermine.setVelocityY(200);
-            // ermineATK.setVelocityY(200);
         } else {
             ermine.setVelocityY(0);
-            // ermineATK.setVelocityY(0);
         }
         if (keyA.isDown) {
             ermine.setVelocityX(-300);
-            // ermineATK.setVelocityX(-300);
         } else if (keyD.isDown) {
             ermine.setVelocityX(300);
-            // ermineATK.setVelocityX(300);
         } else {
             ermine.setVelocityX(0);
-            // ermineATK.setVelocityX(0);
         }
         if(keyAtk.isDown){
             ermine.anims.play('ermineAniATK',true);
