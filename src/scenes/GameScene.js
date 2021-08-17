@@ -241,7 +241,7 @@ class GameScene extends Phaser.Scene {
                 snowManGroup.add(snowman);
                 snowman.setVelocityX(Phaser.Math.Between(-300, -800));
                 snowman.anims.play("snowmanAni", true);
-                this.physics.add.overlap(ermine, snowman, () => {
+                this.physics.add.overlap(ermine, snowman, snowmanDestroy, () => {
                     if (keyAtk.isUp) {
                         if (ermine.immortal == false) {
                             snowman.destroy();
@@ -292,11 +292,11 @@ class GameScene extends Phaser.Scene {
                             });
                         }
                     }
-                    else if (keyAtk.isDown) {
-                        if (ermine.anims.isPlaying && ermine.anims.currentAnim.key == 'ermineAniATK') {
-                            snowman.destroy();
-                        }
-                    }
+                    // else if (keyAtk.isDown) {
+                    //     if (ermine.anims.isPlaying && ermine.anims.currentAnim.key == 'ermineAniATK') {
+                    //         snowman.destroy();
+                    //     }
+                    // }
                 });
                 snowman.depth = snowman.y;
             },
@@ -304,6 +304,10 @@ class GameScene extends Phaser.Scene {
             loop: true,
             paused: false,
         });
+
+        function snowmanDestroy(ermine, snowman) {
+            snowman.destroy();
+        }
 
         //Player Control
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
