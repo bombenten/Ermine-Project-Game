@@ -214,7 +214,7 @@ class GameScene extends Phaser.Scene {
             paused: false,
         });
 
-        //Snowman Ball Animation
+        //Snowman Animation
         let snowmanAni = this.anims.create({
             key: "snowmanAni",
             frames: this.anims.generateFrameNumbers("snowman", {
