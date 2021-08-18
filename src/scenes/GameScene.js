@@ -48,6 +48,7 @@ class GameScene extends Phaser.Scene {
         this.load.spritesheet("snowball", "src/image/snowball.png", { frameWidth: 300, frameHeight: 300, });
         this.load.spritesheet("snowman", "src/image/Snowman.png", { frameWidth: 1000, frameHeight: 1000, });
         this.load.spritesheet("heart", "src/image/heart.png", { frameWidth: 64, frameHeight: 66, });
+
     }
 
     create() {
@@ -308,6 +309,8 @@ class GameScene extends Phaser.Scene {
         function snowmanDestroy(ermine, snowman) {
             snowman.destroy();
         }
+
+
 
         //Player Control
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);

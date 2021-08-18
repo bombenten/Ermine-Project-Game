@@ -46,9 +46,9 @@ class MainMenu extends Phaser.Scene {
         this.load.image('logo', 'src/image/logo.png');
         this.load.image('game', 'src/image/on top logo.png');
         //Button
-        this.load.image('arcade', 'src/image/Arcade.png');
-        this.load.image('howtoplay', 'src/image/how to button.png');
-        this.load.image('story', 'src/image/story.png');
+        this.load.image('arcade', 'src/image/button/Arcade.png');
+        this.load.image('howtoplay', 'src/image/button/Tutorial.png');
+        this.load.image('story', 'src/image/button/Story.png');
         this.load.image('play', 'src/image/button.png');
         //Character
         this.load.spritesheet('ermineMenu', 'src/image/ermineAll.png',
