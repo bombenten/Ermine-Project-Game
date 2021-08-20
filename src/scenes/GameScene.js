@@ -38,10 +38,10 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         //Back ground
-        this.load.image("foreGround", "src/image/FG ermine.png");
-        this.load.image("middleGround", "src/image/MG ermine.png");
-        this.load.image("backGround", "src/image/BG ermine.png");
-        this.load.image("skyblock", "src/image/SkyBlock.png");
+        this.load.image("foreGround", "src/image/background/FG ermine.png");
+        this.load.image("middleGround", "src/image/background/MG ermine.png");
+        this.load.image("backGround", "src/image/background/BG ermine.png");
+        this.load.image("skyblock", "src/image/background/SkyBlock.png");
 
         //Animation
         this.load.spritesheet("ermine", "src/image/ErmineAll.png", { frameWidth: 500, frameHeight: 300, });
@@ -359,6 +359,7 @@ class GameScene extends Phaser.Scene {
         for (let i = 0; i < snowGroup.getChildren().length; i++) {
             if (snowGroup.getChildren()[i].x < -150) {
                 snowGroup.getChildren()[i].destroy();
+                console.log("hi");
             }
         }
 
@@ -366,6 +367,7 @@ class GameScene extends Phaser.Scene {
         for (let i = 0; i < snowManGroup.getChildren().length; i++) {
             if (snowManGroup.getChildren()[i].x < -10) {
                 snowManGroup.getChildren()[i].destroy();
+                console.log("hi");
             }
         }
     }
