@@ -293,11 +293,11 @@ class GameScene extends Phaser.Scene {
                             });
                         }
                     }
-                    // else if (keyAtk.isDown) {
-                    //     if (ermine.anims.isPlaying && ermine.anims.currentAnim.key == 'ermineAniATK') {
-                    //         snowman.destroy();
-                    //     }
-                    // }
+                    else if (keyAtk.isDown) {
+                        if (ermine.anims.isPlaying && ermine.anims.currentAnim.key == 'ermineAniATK') {
+                            snowman.destroy();
+                        } 
+                    }
                 });
                 snowman.depth = snowman.y;
             },
