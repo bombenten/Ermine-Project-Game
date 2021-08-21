@@ -10,7 +10,6 @@ let skybox;
 let ermine;
 let snowball;
 let snowman;
-// let golem;
 let ermineATK;
 let heart;
 let playerHeart = 3;
@@ -417,10 +416,11 @@ class GameScene extends Phaser.Scene {
         ermine.depth = ermine.y - (ermine.height - 254);
 
         //BG Tile Sprite
+        if(countDestroy<3){
             foreGround.tilePositionX += 10;
             middleGround.tilePositionX += 6;
             backGround.tilePositionX += 3;
-
+        }
         //Input from keyboard
         if (keyW.isDown) {
             ermine.setVelocityY(-200);
