@@ -1,13 +1,9 @@
 import Phaser from "phaser";
 
-let golem;
-let golemEvent;
-
-
-class Defualt extends Phaser.Scene {
+class BossFight extends Phaser.Scene {
     constructor(test) {
         super({
-            key: 'Defualt'
+            key: 'BossFight'
         });
     }
 
@@ -52,4 +48,4 @@ class Defualt extends Phaser.Scene {
     }
 }
 
-export default Defualt;
+export default BossFight;
